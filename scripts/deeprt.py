@@ -1,7 +1,7 @@
 import os
 import sys
 
-sys.path.append('../')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.deeprt_plus import load_param
 from models.deeprt_plus import train_deeprt_plus

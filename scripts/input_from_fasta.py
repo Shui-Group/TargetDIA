@@ -1,6 +1,7 @@
 import argparse
 import os
 
+from utils import ms_prediction
 from utils import seq_process
 
 if __name__ == '__main__':
@@ -67,11 +68,11 @@ if __name__ == '__main__':
     fasta_name = os.path.splitext(os.path.basename(fasta_path))[0]
     deeprt_input_path = os.path.join(out_dir, f'Input-DeepRT-{fasta_name}.txt')
     print(f'Generating DeepRT input: {deeprt_input_path}')
-    scripts.utils.ms_prediction.deeprt.deeprt_input(deeprt_input_path, modpeps)
+    ms_prediction.deeprt.deeprt_input(deeprt_input_path, modpeps)
     print(f'Adding charge {charge}')
     precs = seq_process.batch_add_target_charge(modpeps, charge)
     pdeep_input_path = os.path.join(out_dir, f'Input-pDeep-{fasta_name}.txt')
     print(f'Generating pDeep input: {pdeep_input_path}')
-    scripts.utils.ms_prediction.pdeep.pdeep_input(pdeep_input_path, precs)
+    ms_prediction.pdeep.pdeep_input(pdeep_input_path, precs)
 
     print('Done')

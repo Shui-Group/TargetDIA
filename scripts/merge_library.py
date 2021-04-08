@@ -1,5 +1,6 @@
 import argparse
 
+from utils import ms_prediction
 from utils import spectronaut as post_sn
 from utils.seq_process import ModOperation
 
@@ -44,9 +45,9 @@ The two pairs are conflicting''')
     if ion_file and rt_file:
         mod_processor = ModOperation()
         print(f'Loading ion data from {ion_file}')
-        ion_data = scripts.utils.ms_prediction.pdeep.read_pdeep_pred(ion_file, mod_processor)
+        ion_data = ms_prediction.pdeep.read_pdeep_pred(ion_file, mod_processor)
         print(f'Loading RT data from {rt_file}')
-        rt_data = scripts.utils.ms_prediction.deeprt.read_deeprt_pred(rt_file)
+        rt_data = ms_prediction.deeprt.read_deeprt_pred(rt_file)
         print(f'Writing library to {out_path}')
         post_sn.write_lib(out_path, ion_data, rt_data)
 
