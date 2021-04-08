@@ -1,11 +1,11 @@
-import sys
 import os
+import sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.pdeep2.load_param import load_pdeep2_param
 from models.pdeep2.train import train_pdeep2
 from models.pdeep2.predict import predict_pdeep2
-
 
 if __name__ == '__main__':
 

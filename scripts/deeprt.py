@@ -1,11 +1,11 @@
-import sys
 import os
+import sys
+
 sys.path.append('../')
 
 from models.deeprt_plus import load_param
 from models.deeprt_plus import train_deeprt_plus
 from models.deeprt_plus import pred_deeprt_plus
-
 
 if __name__ == '__main__':
 
@@ -30,4 +30,3 @@ if __name__ == '__main__':
         pred_deeprt_plus.deeprt_pred(param)
     else:
         raise ValueError('The second argument should be defined as a task name: training / eval / predict')
-

@@ -43,7 +43,7 @@ class Corpus(object):
 
         # max length:
         self.max_length = config['Max_Len']
-        print('DeepRT: using max length defined by user:', self.max_length) # DeepRT
+        print('DeepRT: using max length defined by user:', self.max_length)  # DeepRT
 
         self.dictionary = dictionary
 
@@ -53,13 +53,13 @@ class Corpus(object):
             self.dictionary.add_word(aa)
 
         # train data:
-        self.train, self.train_label = self.tokenize(train_path, pad_length=0)
+        self.train, self.train_label, self.train_pepseq = self.tokenize(train_path, pad_length=0)
         print('Read training data done; source:', train_path)
         # self.valid = self.tokenize(os.path.join(path, 'valid.txt'))
 
         # Test data:
         if '' != test_path:
-            self.test, self.test_label = self.tokenize(test_path, pad_length=0)
+            self.test, self.test_label, self.test_pepseq = self.tokenize(test_path, pad_length=0)
             print('Read testing data done; source:', test_path)
         else:
             print('Note: didn\'t load test data.' )
@@ -72,7 +72,12 @@ class Corpus(object):
         """Tokenizes a text file."""
         assert os.path.exists(path)
         # Add words to the dictionary, generally there is no new char in test data file, but we still do this again
-        seq_data = pd.read_csv(path, sep = '\t')
+        seq_data = pd.read_csv(path, sep='\t')
+        input_size = len(seq_data)
+        seq_data = seq_data[seq_data[self.config['Seq_Col_Name']].str.len() <= self.max_length].reset_index(drop=True)
+        processed_size = len(seq_data)
+        print(f'Dropped {input_size - processed_size} rows caused by the too long peptide length')
+        used_pep_seq_list = seq_data[self.config['Seq_Col_Name']].tolist()
         # for aa in sorted(set(''.join(seq_data['sequence'].values))):
         #     self.dictionary.add_word(aa)
 
@@ -105,5 +110,5 @@ class Corpus(object):
             ids = ids.cuda()
             label = label.cuda()
 
-        return ids, label
+        return ids, label, used_pep_seq_list
 

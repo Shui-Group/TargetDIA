@@ -32,6 +32,7 @@ def pred_from_model(config,
 
     # TODO: handle int
     # TODO: if Batch == 16, peptide number cannot be: 16X+1
+    # TODO 最后一个 batch 的 size 如果不符合，digit capsule layer 的输入第 0 个维度 size 为 1（应该是 16）
     pred_batch_number = int(RTdata.test.shape[0] / PRED_BATCH) + 1
     for bi in range(pred_batch_number):
         test_batch = Variable(RTdata.test[bi * PRED_BATCH:(bi + 1) * PRED_BATCH, :])
@@ -47,6 +48,7 @@ def ensemble(obse, pred_list):
         pred_ensemble += pred_list[i+1]
     pred_ensemble = pred_ensemble/len(pred_list)
     print('[ensemble %d] %.5f %.5f' % (len(pred_list), Pearson(obse, pred_ensemble), Delta_t95(obse, pred_ensemble)))
+
     return pred_ensemble
 
 
@@ -77,8 +79,8 @@ def deeprt_pred(config):
     model_r2_conv = config['Conv_R2_Model']
     model_r3_conv = config['Conv_R3_Model']
 
-    max_rt = config['Min_RT']
-    min_rt = config['Max_RT']
+    min_rt = config['Min_RT']
+    max_rt = config['Max_RT']
 
     max_len = config['Max_Len']
 
@@ -100,7 +102,7 @@ def deeprt_pred(config):
         pred_ensemble = pred1 * (max_rt - min_rt) + min_rt
         obse = obse * (max_rt - min_rt) + min_rt
 
-    predict_seq_values = pd.read_csv(pred_input_path, sep='\t')[config['Seq_Col_Name']].values
+    predict_seq_values = corpus.test_pepseq
 
     with open(pred_output_path, 'w') as fo:
         fo.write('seq\tobserved\tpredicted\n')

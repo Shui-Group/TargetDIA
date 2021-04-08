@@ -1,9 +1,9 @@
 import json
 import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src'))
-from mskit.constants import AA
 
+
+AAList_20 = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L',
+             'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
 
 DeepRT_Dataset_Folder = os.path.abspath(r'')
 DeepRT_Pretrain_Folder = os.path.abspath(r'')
@@ -14,7 +14,7 @@ DeepRT_WorkSpace_Folder = os.path.join(os.path.abspath(r''), this_task)
 
 
 DeepRTParam = {
-    'AA_List': AA.AAList_20 + ['1', '2', '3', '4'],
+    'AA_List': AAList_20 + ['1', '2', '3', '4'],
 
     'PATH_PretrainModel': os.path.join(DeepRT_Pretrain_Folder, 'dia_all_epo20_dim24_conv8/dia_all_epo20_dim24_conv8_filled.pt'),  # This should be blank if use no pretrain model
     'Conv_Train': 8,
