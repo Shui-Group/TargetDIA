@@ -27,8 +27,7 @@ Generate a DIA hybrid spectral library combining an initial DIA library and a ta
 
 + Latest version of anaconda is recommended.
 
-+ A NVIDIA GPU with CUDA (10.0) and cuDNN (7.5) is needed.
-   * PyTorch 0.4.1 from conda has CUDA support up to 9.0, but it also works in CUDA 10.0 for DeepRT required functions (many new cards only supports CUDA 10+, like RTX2080)
++ A NVIDIA GPU with CUDA and cuDNN is needed.
 
 + The main packages we used in the whole project are:
 
