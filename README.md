@@ -130,27 +130,27 @@ To make more accurate prediction based on the in-house experimental data, the ex
     
       + For pDeep2 (a subset of config)
     
-        ```json
+        ```python
         {
-            "TrainsetFolder": "/path/to/just/generated/data/folder",  // The folder stores pDeep2 training data. This can be directed to the folder generated in the last step
-            "ModelOutFolder": "/store/new/model/param/in/this/folder/",  // Where to store the generated pDeep2 model. Notice that this need a folder to store plural files but not a file path
-            "ModelOutName": "A_fine_tuned_model_param",  // Define the generated model name
-            "PretrainedModelPath": "/path/to/pDeep2/pretrained_models/pretrain-180921-modloss/or_others",  // Use this model param as the pre-trained model param. Notice this should be a pure base name with no suffix. All pre-trained model params are stored in pretrained_models/model-180921-modloss in pDeep2 model folder
-            "TensorboardFolder": "/store/tensorboard/file/in/this/folder/"  // Folder for tensorboard
+            "TrainsetFolder": "/path/to/just/generated/data/folder",  # The folder stores pDeep2 training data. This can be directed to the folder generated in the last step
+            "ModelOutFolder": "/store/new/model/param/in/this/folder/",  # Where to store the generated pDeep2 model. Notice that this need a folder to store plural files but not a file path
+            "ModelOutName": "A_fine_tuned_model_param",  # Define the generated model name
+            "PretrainedModelPath": "/path/to/pDeep2/pretrained_models/pretrain-180921-modloss/or_others",  # Use this model param as the pre-trained model param. Notice this should be a pure base name with no suffix. All pre-trained model params are stored in pretrained_models/model-180921-modloss in pDeep2 model folder
+            "TensorboardFolder": "/store/tensorboard/file/in/this/folder/"  # Folder for tensorboard
         }
         ```
     
       + For DeepRTPlus
     
-        ```json
+        ```python
         {
-            "PATH_PretrainModel": "/path/to/deeprt_plus/param/dia_all_epo20_dim24_conv8/dia_all_epo20_dim24_conv8_filled.pt-or_others",  // Define the path of pre-trained DeepRT model param. Three params are stored in param/dia_all_epo20_dim24_conv[8,10,12]
-            "Conv_Train": 8,  // Define the conv kernal size. This should be same as the pre-trained model param used
-            "PATH_TrainSet": "/path/to/just/generated/data",  // Define the training data file for DeepRT
-            "PATH_TrainResult": "/path/of/training/data/result",  // The output path of training result. This will contain the input RTs final predicted RTs for further analysis
-            "PATH_SavePrefix": "/path/to/store/generated/model/params",  // A folder to store the generated DeepRT model params
-            "PATH_TestSet": "/path/to/test/data",  // File for model test
-            "PATH_Log": "/path/to/store/log/file"  // Where to store the training log
+            "PATH_PretrainModel": "/path/to/deeprt_plus/param/dia_all_epo20_dim24_conv8/dia_all_epo20_dim24_conv8_filled.pt-or_others",  # Define the path of pre-trained DeepRT model param. Three params are stored in param/dia_all_epo20_dim24_conv[8,10,12]
+            "Conv_Train": 8,  # Define the conv kernal size. This should be same as the pre-trained model param used
+            "PATH_TrainSet": "/path/to/just/generated/data",  # Define the training data file for DeepRT
+            "PATH_TrainResult": "/path/of/training/data/result",  # The output path of training result. This will contain the input RTs final predicted RTs for further analysis
+            "PATH_SavePrefix": "/path/to/store/generated/model/params",  # A folder to store the generated DeepRT model params
+            "PATH_TestSet": "/path/to/test/data",  # File for model test
+            "PATH_Log": "/path/to/store/log/file"  # Where to store the training log
         }
         ```
     
@@ -201,25 +201,25 @@ Use of a targeted virtual library in DIA data processing allows much increased s
 
         + For pDeep2
 
-          ```json
+          ```python
           {
-              "ModelForPredFolder": "/stored/new/model/param",  // The folder contains model param used for prediction. This can be set to the same value as "ModelOutFolder" for convenience
-              "ModelForPredName": "A_fine_tuned_model_param",  // Use which model stored in "ModelForPredFolder". This can be set to the same value as "ModelOutName"
-              "PredInputPath": "/path/to/just/generated/input/file",  // The path of prediction input file
-              "PredOutPath": "/path/to/output/prediction/result"  // Where to output the prediction result file
+              "ModelForPredFolder": "/stored/new/model/param",  # The folder contains model param used for prediction. This can be set to the same value as "ModelOutFolder" for convenience
+              "ModelForPredName": "A_fine_tuned_model_param",  # Use which model stored in "ModelForPredFolder". This can be set to the same value as "ModelOutName"
+              "PredInputPath": "/path/to/just/generated/input/file",  # The path of prediction input file
+              "PredOutPath": "/path/to/output/prediction/result"  # Where to output the prediction result file
           }
           ```
 
         + For DeepRTPlus
 
-          ```json
+          ```python
           {
-              "PATH_TrainSet": "/path/to/just/generated/data",  // Define the training data file for DeepRT. In the design of DeepRT, a train set is not only for training, but also as a dictionary to get tokens (used aa). Though in this modified version, to keep the consensus among multi uses, AA_List is defined as a key in config file, the original loading step is not modified, so this path should also be defined
-              "PATH_TestSet": "/path/of/prediction/input/file",  // Different with the training step, this value becomes the prediction input now
-              "PATH_Pred_Output": "/path/to/output/prediction/result",  // Where to store the prediction result file
-              "PATH_R1_Model": "",  // A model param with 8 conv kernal size. Notice, if only this one model param is defined, the prediction will be performed with this model param only. If the following two are also defined, the prediction will be based on all three model params and ensemble will be performed (an average of prediction results)
-              "PATH_R2_Model": "",  // A model param with 10 conv kernal size
-              "PATH_R3_Model": "",  // A model param with 12 conv kernal size
+              "PATH_TrainSet": "/path/to/just/generated/data",  # Define the training data file for DeepRT. In the design of DeepRT, a train set is not only for training, but also as a dictionary to get tokens (used aa). Though in this modified version, to keep the consensus among multi uses, AA_List is defined as a key in config file, the original loading step is not modified, so this path should also be defined
+              "PATH_TestSet": "/path/of/prediction/input/file",  # Different with the training step, this value becomes the prediction input now
+              "PATH_Pred_Output": "/path/to/output/prediction/result",  # Where to store the prediction result file
+              "PATH_R1_Model": "",  # A model param with 8 conv kernal size. Notice, if only this one model param is defined, the prediction will be performed with this model param only. If the following two are also defined, the prediction will be based on all three model params and ensemble will be performed (an average of prediction results)
+              "PATH_R2_Model": "",  # A model param with 10 conv kernal size
+              "PATH_R3_Model": "",  # A model param with 12 conv kernal size
               "Conv_R1_Model": 8,
               "Conv_R2_Model": 10,
               "Conv_R3_Model": 12
